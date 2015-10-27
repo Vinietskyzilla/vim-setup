@@ -9,6 +9,12 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kien/ctrlp.vim'
 Plugin 'sheerun/vim-polyglot'
+" To make solarized look right in iTerm, import and select this in iTerm
+" preferences > profile > colors > load presets:
+" https://raw.githubusercontent.com/altercation/solarized/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors
+" Similar process for Terminal, but import
+" https://raw.githubusercontent.com/tomislav/osx-terminal.app-colors-solarized/master/Solarized%20Dark.terminal
+Plugin 'altercation/vim-colors-solarized'
 call vundle#end()
 " This changes formatoptions from tcq to croql for some reason.
 filetype plugin indent on    " required
@@ -24,8 +30,6 @@ filetype plugin indent on    " required
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Modified version of https://github.com/amix/vimrc/blob/75bb26dc783620ab4ad3cc98c13b29fdb85c3654/vimrcs/basic.vim
-" - Added some more at the bottom in the last section.
-" - Deleted some stuff I never use, or is redundant after above setup, from all the other sections.
 "
 " Sections:
 "    -> General
@@ -129,17 +133,32 @@ set foldcolumn=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 
-colorscheme desert
-
-set background=dark
-
 " Set extra options when running in GUI mode
 if has("gui_running")
+    set background=dark
+    colorscheme desert
     set guioptions-=T
     set guioptions-=e
     set t_Co=256
     set guitablabel=%M\ %t
+else
+    " Can't decide... Color schemes sure are a lot easier in MacVim.
+
+    " ~/.vim/colors/desert256.vim
+    " http://www.vim.org/scripts/script.php?script_id=1243
+    " http://www.vim.org/scripts/download_script.php?src_id=4055
+    " Sets background=light
+    "colorscheme desert256
+    set background=dark
+    "colors solarized
+    colors desert
 endif
+
+" Make cursor not blink in gvim.
+set guicursor+=a:blinkon0
+
+" gvim font.
+set guifont=Monaco:h16
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -275,12 +294,6 @@ endfunction
 
 " In gvim, always yank (y or dd) to and put (p) from clipboard.
 set clipboard=unnamed
-
-" Make cursor not blink in gvim.
-set guicursor+=a:blinkon0
-
-" gvim font.
-set guifont=Monaco:h16
 
 " Rails loves 2, so 2 it is.
 au FileType ruby setl shiftwidth=2 tabstop=2
