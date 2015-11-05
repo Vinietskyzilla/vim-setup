@@ -125,9 +125,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Add a bit extra margin to the left
-set foldcolumn=1
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -304,8 +301,8 @@ set number
 
 " Show whitespace characters (tab, space, etc.) as visible characters.
 set list
-" Show trailing whitespace as visible dot.
-set lcs=trail:⋅
+" Don't show eol character.
+set lcs=
 
 " I forget what this does, maybe use mouse in vim in screen or tmux?
 if &term =~ '^screen'
